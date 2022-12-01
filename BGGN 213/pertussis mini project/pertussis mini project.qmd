@@ -1,0 +1,341 @@
+---
+title: "pertussis mini project"
+author: "Liz Chamiec-Case"
+format: pdf
+editor: visual
+---
+
+## Investigating pertussis cases by year
+
+```{r}
+library(datapasta) 
+
+cdc <- tibble::tribble(
+                               ~Year,    ~Reported_Cases,
+                                1922,	107473,
+                                    1923,	164191,
+                                    1924,	165418,
+                                    1925,	152003,
+                                    1926,	202210,
+                                    1927,	181411,
+                                    1928,	161799,
+                                    1929,	197371,
+                                    1930,	166914,
+                                    1931,	172559,
+                                    1932,	215343,
+                                    1933,	179135,
+                                    1934,	265269,
+                                    1935,	180518,
+                                    1936,	147237,
+                                    1937,	214652,
+                                    1938,	227319,
+                                    1939,	103188,
+                                    1940,	183866,
+                                    1941,	222202,
+                                    1942,	191383,
+                                    1943,	191890,
+                                    1944,	109873,
+                                    1945,	133792,
+                                    1946,	109860,
+                                    1947,	156517,
+                                    1948,	74715,
+                                    1949,	69479,
+                                    1950,	120718,
+                                    1951,	68687,
+                                    1952,	45030,
+                                    1953,	37129,
+                                    1954,	60886,
+                                    1955,	62786,
+                                    1956,	31732,
+                                    1957,	28295,
+                                    1958,	32148,
+                                    1959,	40005,
+                                    1960,	14809,
+                                    1961,	11468,
+                                    1962,	17749,
+                                    1963,	17135,
+                                    1964,	13005,
+                                    1965,	6799,
+                                    1966,	7717,
+                                    1967,	9718,
+                                    1968,	4810,
+                                    1969,	3285,
+                                    1970,	4249,
+                                    1971,	3036,
+                                    1972,	3287,
+                                    1973,	1759,
+                                    1974,	2402,
+                                    1975,	1738,
+                                    1976,	1010,
+                                    1977,	2177,
+                                    1978,	2063,
+                                    1979,	1623,
+                                    1980,	1730,
+                                    1981,	1248,
+                                    1982,	1895,
+                                    1983,	2463,
+                                    1984,	2276,
+                                    1985,	3589,
+                                    1986,	4195,
+                                    1987,	2823,
+                                    1988,	3450,
+                                    1989,	4157,
+                                    1990,	4570,
+                                    1991,	2719,
+                                    1992,	4083,
+                                    1993,	6586,
+                                    1994,	4617,
+                                    1995,	5137,
+                                    1996,	7796,
+                                    1997,	6564,
+                                    1998,	7405,
+                                    1999,	7298,
+                                    2000,	7867,
+                                    2001,	7580,
+                                    2002,	9771,
+                                    2003,	11647,
+                                    2004,	25827,
+                                    2005,	25616,
+                                    2006,	15632,
+                                    2007,	10454,
+                                    2008,	13278,
+                                    2009,	16858,
+                                    2010,	27550,
+                                    2011,	18719,
+                                    2012,	48277,
+                                    2013,	28639,
+                                    2014,	32971,
+                                    2015,	20762,
+                                  2016,	17972,
+                                  2017,	18975,
+                                  2018,	15609,
+                                  2019,	18617
+    )
+
+cdc
+```
+
+\
+
+```{r}
+library(ggplot2)
+ggplot(cdc) +
+  aes(x=Year, y=Reported_Cases) +
+  geom_point() +
+  geom_line() +
+  labs(x="Year",y="Number of Cases",title="Pertussis Cases by Year") +
+  geom_vline(xintercept=1946,color="blue") +
+  geom_vline(xintercept=1996,color="red")
+```
+
+Q3. Describe what happened after the introduction of the aP vaccine? Do you have a possible explanation for the observed trend?
+
+After the aP vaccine was introduced, the number of cases started to rise for the first time in years. This could be due to distrust in a new vaccine, development of new strains that the newer vaccines are less effective against, or better testing methods.
+
+```{r}
+library(jsonlite)
+subject <- read_json("https://www.cmi-pb.org/api/subject", simplifyVector = TRUE) 
+head(subject, 3)
+```
+
+Q4. How many aP and wP infancy vaccinated subjects are in the dataset?
+
+```{r}
+table(subject$infancy_vac)
+```
+
+Q5. How many Male and Female subjects/patients are in the dataset?
+
+```{r}
+table(subject$biological_sex)
+```
+
+Q6. What is the breakdown of race and biological sex (e.g. number of Asian females, White males etc...)?
+
+```{r}
+table(subject$race,subject$biological_sex)
+```
+
+```{r}
+library(lubridate)
+
+# i) average age of wP individuals
+wP <- subset(subject,infancy_vac == "wP")
+wP['age_days'] <- today() - ymd(wP$year_of_birth)
+wP['age_years'] <- round(time_length( today() - ymd(wP$year_of_birth),  "years"))
+summary(wP$age_years)
+```
+
+```{r}
+# ii) average age of aP individuals
+aP <- subset(subject,infancy_vac == "aP")
+aP['age_days'] <- today() - ymd(aP$year_of_birth)
+aP['age_years'] <- round(time_length( today() - ymd(aP$year_of_birth),  "years"))
+summary(aP$age_years)
+```
+
+iii\) are they significantly different?
+
+In the absence of a statistical test, we can tell that the average ages are likely significantly different because there is no overlap in the data (max(aP) \< min(wP)). This makes sense since the wP vaccine was likely discontinued when the aP vaccine was introduced.
+
+also significant with a wilcox test:
+
+```{r}
+x <- t.test(wP$age_years,aP$age_years)
+
+x$p.value
+```
+
+Q8. Determine the age of all individuals at time of boost?
+
+```{r}
+subject['age_at_boost'] <- round(time_length(ymd(subject$date_of_boost) - ymd(subject$year_of_birth),"years"))
+subject['age_at_boost']
+```
+
+Q9. With the help of a faceted boxplot or histogram (see below), do you think these two groups are significantly different?
+
+Yes - aP has a much smaller mean and variance whereas wP has a higher mean and variance. There is almost no overlap between the two groups.
+
+```{r}
+# Or use wilcox.test() 
+x <- t.test(wP$age_years,aP$age_years)
+
+x$p.value
+```
+
+## Joining multiple tables
+
+```{r}
+# Complete the API URLs
+specimen <- read_json("https://www.cmi-pb.org/api/specimen", simplifyVector = TRUE) 
+titer <- read_json("https://www.cmi-pb.org/api/ab_titer", simplifyVector = TRUE)
+
+# join datasets
+library(dplyr)
+meta <- full_join(specimen, subject)
+dim(meta)
+head(meta)
+```
+
+```{r}
+# join meta and titer
+abdata <- inner_join(titer, meta)
+dim(abdata)
+```
+
+```{r}
+table(abdata$isotype)
+```
+
+Q12. What do you notice about the number of visit 8 specimens compared to other visits?
+
+```{r}
+table(abdata$visit)
+```
+
+There are substantially fewer visit 8 specimens as compared to the other visits
+
+## Examine IgG1 Ab titer levels
+
+```{r}
+ig1 <- abdata %>% filter(isotype == "IgG1", visit!=8)
+head(ig1)
+```
+
+Q13. Complete the following code to make a summary boxplot of Ab titer levels for all antigens:
+
+```{r}
+ggplot(ig1) +
+  aes(MFI, antigen) +
+  geom_boxplot() + 
+  facet_wrap(vars(visit), nrow=2)
+```
+
+Q14. What antigens show differences in the level of IgG1 antibody titers recognizing them over time? Why these and not others?
+
+FIM2/3 differs quite a bit over time, although it seems to have a lot of outliers. It also saturates the plot, so it's difficult to tell if other antigens are responding similarly. This trend is not well reflected in the CBI-PM data, though.
+
+```{r}
+ggplot(ig1) +
+  aes(MFI, antigen, col=infancy_vac ) +
+  geom_boxplot(show.legend = FALSE) + 
+  facet_wrap(vars(visit), nrow=2) +
+  theme_bw()
+```
+
+```{r}
+ggplot(ig1) +
+  aes(MFI, antigen, col=infancy_vac ) +
+  geom_boxplot(show.legend = FALSE) + 
+  facet_wrap(vars(infancy_vac, visit), nrow=2) +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+```
+
+Q15. Filter to pull out only two specific antigens for analysis and create a boxplot for each. You can chose any you like. Below I picked a "control" antigen ("Measles", that is not in our vaccines) and a clear antigen of interest ("FIM2/3", extra-cellular fimbriae proteins from B. pertussis that participate in substrate attachment).
+
+```{r}
+filter(ig1, antigen=="TT") %>%
+  ggplot() +
+  aes(MFI, col=infancy_vac) +
+  geom_boxplot(show.legend = TRUE) +
+  facet_wrap(vars(visit)) +
+  theme_bw()
+```
+
+```{r}
+filter(ig1, antigen=="FIM2/3") %>%
+  ggplot() +
+  aes(MFI, col=infancy_vac) +
+  geom_boxplot(show.legend = TRUE) +
+  facet_wrap(vars(visit)) +
+  theme_bw()
+```
+
+Q16. What do you notice about these two antigens time courses and the FIM2/3 data in particular?
+
+Both TT and FIM2/3 antigen time courses rise over time, perhaps TT more so than FIM2/3 but difficult to tell because TT has large error bars. FIM2/3 seems to peak around visit 5 whereas TT does not come back down.
+
+Q17. Do you see any clear difference in aP vs. wP responses?
+
+In FIM2/3, aP seems to increase more than wP does over time. The effect is smaller if present at all in TT.
+
+## Obtaining CMI-PB RNASeq data
+
+```{r}
+url <- "https://www.cmi-pb.org/api/v2/rnaseq?versioned_ensembl_gene_id=eq.ENSG00000211896.7"
+
+rna <- read_json(url, simplifyVector = TRUE) 
+
+ssrna <- inner_join(rna, meta)
+```
+
+```{r}
+ggplot(ssrna) +
+  aes(x=visit, y=tpm, group=subject_id) +
+  geom_point() +
+  geom_line(alpha=0.2)
+```
+
+Q19.: What do you notice about the expression of this gene (i.e. when is it at it's maximum level)?
+
+The expression of this gene peaks very specifically at visit 4 by more than double the expression at any other visits.
+
+Q20. Does this pattern in time match the trend of antibody titer data? If not, why not?
+
+This makes sense - the antibody titer data for FIM2/3 peaks at visit 5 then declines after that. It takes time from expression of the gene to produce/circulate the protein so, depending on how far apart the visits are, we might expect to see this.
+
+```{r}
+ggplot(ssrna) +
+  aes(tpm, col=infancy_vac) +
+  geom_boxplot() +
+  facet_wrap(vars(visit))
+```
+
+```{r}
+ssrna %>%  
+  filter(visit==4) %>% 
+  ggplot() +
+    aes(tpm, col=infancy_vac) + geom_density() + 
+    geom_rug() 
+```

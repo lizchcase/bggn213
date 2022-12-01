@@ -1,0 +1,8 @@
+"0","# Or use wilcox.test() "
+"0","x <- t.test(wP$age_years,aP$age_years)"
+"0",""
+"0","x$p.value"
+"1","[1]"
+"1"," 1.315544e-16"
+"1","
+"
