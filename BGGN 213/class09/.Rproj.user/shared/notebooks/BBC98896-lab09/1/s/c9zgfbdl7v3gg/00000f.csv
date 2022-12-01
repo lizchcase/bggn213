@@ -1,0 +1,4 @@
+"0","# project new data onto PCA space"
+"0","url <- ""https://tinyurl.com/new-samples-CSV"""
+"0","new <- read.csv(url)"
+"0","npc <- predict(wisc.pr, newdata=new)"

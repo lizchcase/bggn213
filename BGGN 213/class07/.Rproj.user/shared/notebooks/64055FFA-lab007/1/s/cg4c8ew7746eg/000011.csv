@@ -1,0 +1,2 @@
+"0",""
+"0","text(pca$x[,1], pca$x[,2], labels = colnames(rna.data), pos=c(rep(4,5), rep(2,5)))"

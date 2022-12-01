@@ -1,0 +1,9 @@
+"0","# calculate RMSD"
+"0","rd <- rmsd(pdbs)"
+"2","Warning: No indices provided, using the 204 non NA positions
+"
+"0","# structure-based clustering"
+"0","hc.rd <- hclust(dist(rd))"
+"0","grps.rd <- cutree(hc.rd,k=3)"
+"0",""
+"0","plot(pc.xray,1:2,col=""grey50"",bg=grps.rd,pch=21,cex=1)"

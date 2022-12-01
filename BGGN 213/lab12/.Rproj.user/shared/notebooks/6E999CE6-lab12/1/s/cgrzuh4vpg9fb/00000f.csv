@@ -1,0 +1,5 @@
+"0","print(paste('There are',sum(down.ind),'downregulated genes using 2fc as the threshold.'))"
+"1","[1]"
+"1"," ""There are 367 downregulated genes using 2fc as the threshold."""
+"1","
+"

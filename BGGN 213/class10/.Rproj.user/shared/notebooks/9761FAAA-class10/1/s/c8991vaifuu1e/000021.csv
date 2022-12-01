@@ -1,0 +1,4 @@
+"0","library(ggplot2)"
+"0",""
+"0","ggplot(candy,aes(winpercent, rownames(candy))) +"
+"0","  geom_col()"

@@ -1,0 +1,13 @@
+"0","# Create a data.frame for ggplot"
+"0","df <- as.data.frame(wisc.pr$x)"
+"0","df$diagnosis <- diagnosis"
+"0",""
+"0","# Load the ggplot2 package"
+"0","library(ggplot2)"
+"2","Want to understand how all the pieces fit together? Read R for Data Science:
+https://r4ds.had.co.nz/
+"
+"0","# Make a scatter plot colored by diagnosis"
+"0","ggplot(df) + "
+"0","  aes(PC1, PC2, col=diagnosis) + "
+"0","  geom_point()"

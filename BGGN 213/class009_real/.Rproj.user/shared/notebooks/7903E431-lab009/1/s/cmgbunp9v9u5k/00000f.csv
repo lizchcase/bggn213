@@ -1,0 +1,5 @@
+"0","# Vector containing PDB codes for figure axis"
+"0","ids <- basename.pdb(pdbs$id)"
+"0",""
+"0","# Draw schematic alignment"
+"0","plot(pdbs, labels=ids)"

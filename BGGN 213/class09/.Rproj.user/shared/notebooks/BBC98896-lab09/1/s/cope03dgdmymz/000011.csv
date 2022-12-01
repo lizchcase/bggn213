@@ -1,0 +1,10 @@
+"0","## ggplot based graph"
+"0","library(factoextra)"
+"2","Loading required package: ggplot2
+"
+"2","Want to understand how all the pieces fit together? Read R for Data Science:
+https://r4ds.had.co.nz/
+"
+"2","Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa
+"
+"0","fviz_eig(wisc.pr, addlabels = TRUE)"

@@ -1,0 +1,4 @@
+"0","library(ggplot2)"
+"0",""
+"0","ggplot(sd.nov15) + "
+"0","  geom_histogram(aes(x = percent_of_population_fully_vaccinated))"

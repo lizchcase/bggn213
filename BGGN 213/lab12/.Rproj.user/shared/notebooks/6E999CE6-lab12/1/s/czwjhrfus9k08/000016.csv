@@ -1,0 +1,5 @@
+"0","library(ggplot2)"
+"0","ggplot(meancounts,aes(x=control.mean,y=treated.mean)) +"
+"0","  geom_point() +"
+"0","  scale_x_continuous(trans=""log2"") +"
+"0","  scale_y_continuous(trans=""log2"")"

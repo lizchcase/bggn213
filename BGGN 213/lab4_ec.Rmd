@@ -1,0 +1,51 @@
+---
+title: "lab4"
+author: "Liz Chamiec-Case"
+date: "2022-10-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+source("http://thegrantlab.org/misc/cdc.R")
+View(cdc)
+```
+
+```{r}
+tail(cdc,20)
+```
+
+```{r}
+plot(cdc$height,cdc$weight)
+```
+
+```{r}
+cor(cdc$height, cdc$weight)
+```
+
+```{r}
+weight_kg <- cdc$weight * 0.454
+height_m <- cdc$height * 0.0254
+
+bmi <- weight_kg / (height_m^2)
+cor(cdc$height, bmi)
+plot(cdc$height, bmi)
+```
+
+```{r}
+sum(bmi >= 30)
+```
+
+```{r}
+plot(cdc[1:100,]$height, cdc[1:100,]$weight)
+```
+
+```{r}
+cdc$bmi <- bmi
+cdc.m <- cdc[cdc$gender == "m",]
+sum(cdc.m$bmi >= 30)
+```
+

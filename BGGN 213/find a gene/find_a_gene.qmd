@@ -1,0 +1,37 @@
+---
+title: "find a gene"
+author: "Liz Chamiec-Case"
+format: pdf
+editor: visual
+---
+
+```{r}
+# read alignment sequence
+library(seqinr)
+
+names <- c('Cattle','House_mouse','Gairdner’s_shrewmouse','Roborovski_dwarf_hamster','Chinese_hamster')
+
+alignment <- read.fasta("alignment.fst")
+alignment
+```
+
+```{r}
+library(bio3d)
+library(pheatmap)
+
+alignment$id <- names
+
+identities <- seqidentity(alignment)
+
+pheatmap(identities,angle_col=45,filename='Q7heatmap.png')
+```
+
+```{r}
+consensus <- consensus(alignment)
+blast.pdb(alignment)
+consensus
+```
+
+```{r}
+pdb.annotate("1QO8_A")
+```

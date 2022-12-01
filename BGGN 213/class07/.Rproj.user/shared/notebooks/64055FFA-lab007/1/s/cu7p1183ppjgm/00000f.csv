@@ -1,0 +1,9 @@
+"0","library(ggplot2)"
+"2","Use suppressPackageStartupMessages() to eliminate package startup messages
+"
+"0","df <- as.data.frame(pca$x)"
+"0",""
+"0","# Our first basic plot"
+"0","ggplot(df) + "
+"0","  aes(PC1, PC2) + "
+"0","  geom_point()"

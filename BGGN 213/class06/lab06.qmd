@@ -1,0 +1,39 @@
+---
+title: "class06"
+author: "Liz Chamiec-Case"
+format: pdf
+editor: visual
+---
+
+```{r}
+grade <- function(file.name) {
+  file <- read.csv(file.name) # read in the gradebook csv file
+  for (i in 1:nrow(file)) { # loop through the students
+    student <- file[i,2:6] # isolate grades in a vector w/o col X
+    student[is.na(student)] <- 0 # make NA values into a 0
+    student <- as.matrix(student) # made into a matrix to avoid order error
+    avg.grade <- mean(student[order(student)][2:(length(student))])
+    # avg. grade puts the grades in order then removes the first (lowest) grade
+    # and averages the rest, storing this value in avg.grade
+    student <- data.frame(student) # converts bac into a dataframe
+    file[i,"avg.grade"] <- avg.grade # puts the average grade in a new column
+  }
+  print(file)
+}
+
+grade("C:/Users/echamieccase/Desktop/student_homework.csv")
+
+```
+
+```{r}
+gradebook <- grade("C:/Users/echamieccase/Desktop/student_homework.csv")
+gradebook[is.na(gradebook)] <- 0
+
+# question 2 (student with highest grade):
+print(paste('student',which.max(gradebook[["avg.grade"]])))
+```
+
+```{r}
+# question 3 (homework with lowest score):
+print(paste('homework',which.min(list(mean(gradebook$hw1),mean(gradebook$hw2),mean(gradebook$hw3),mean(gradebook$hw4),mean(gradebook$hw5)))))
+```

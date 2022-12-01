@@ -1,0 +1,6 @@
+"0","# pca and plot results"
+"0","## Again we have to take the transpose of our data "
+"0","pca <- prcomp(t(rna.data), scale=TRUE)"
+"0"," "
+"0","## Simple un polished plot of pc1 and pc2"
+"0","plot(pca$x[,1], pca$x[,2], xlab=""PC1"", ylab=""PC2"")"

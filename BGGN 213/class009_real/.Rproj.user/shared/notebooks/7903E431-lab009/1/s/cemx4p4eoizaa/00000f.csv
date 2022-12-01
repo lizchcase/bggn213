@@ -1,0 +1,3 @@
+"0","# perform PCA"
+"0","pc.xray <- pca(pdbs)"
+"0","plot(pc.xray)"

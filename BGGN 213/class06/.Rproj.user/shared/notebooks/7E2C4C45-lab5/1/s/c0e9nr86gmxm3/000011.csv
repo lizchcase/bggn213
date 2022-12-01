@@ -1,0 +1,6 @@
+"0","ggplot(cars) +"
+"0","  aes(x=speed, y=dist) +"
+"0","  geom_point() +"
+"0","  geom_smooth() +"
+"0","  theme_bw() +"
+"0","  labs(title='Speeds and Distances of Cars',xlab='Speed',ylab='Distance')"

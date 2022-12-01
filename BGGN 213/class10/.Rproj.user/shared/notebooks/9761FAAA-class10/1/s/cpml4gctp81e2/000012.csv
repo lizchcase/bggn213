@@ -1,0 +1,1 @@
+"0","head(candy[order(candy$winpercent),], n=5)"

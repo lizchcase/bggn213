@@ -1,0 +1,2 @@
+"0","# write to csv"
+"0","write.csv(res[ord,], ""deseq_results.csv"")"

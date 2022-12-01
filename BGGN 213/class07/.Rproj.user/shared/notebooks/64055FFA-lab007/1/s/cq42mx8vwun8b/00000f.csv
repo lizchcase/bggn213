@@ -1,0 +1,4 @@
+"0","# load and view data"
+"0","url2 <- ""https://tinyurl.com/expression-CSV"""
+"0","rna.data <- read.csv(url2, row.names=1)"
+"0","head(rna.data)"

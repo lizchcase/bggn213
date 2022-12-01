@@ -1,0 +1,2 @@
+"0","ggplot(vax.36) +"
+"0","  geom_histogram(aes(x=percent_of_population_fully_vaccinated))"

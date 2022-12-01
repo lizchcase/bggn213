@@ -1,0 +1,5 @@
+"0","# Save your input data file into your Project directory"
+"0","fna.data <- ""WisconsinCancer.csv"""
+"0",""
+"0","# Complete the following code to input the data and store as wisc.df"
+"0","wisc.df <- read.csv(fna.data, row.names=1)"

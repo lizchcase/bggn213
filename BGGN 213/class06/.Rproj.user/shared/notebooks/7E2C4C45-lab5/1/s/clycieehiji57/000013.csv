@@ -1,0 +1,5 @@
+"0","# gene regulation data"
+"0",""
+"0","url <- ""https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"""
+"0","genes <- read.delim(url)"
+"0","head(genes)"

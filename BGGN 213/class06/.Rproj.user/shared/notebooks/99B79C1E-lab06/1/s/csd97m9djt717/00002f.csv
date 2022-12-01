@@ -1,0 +1,8 @@
+"0","gradebook[is.na(gradebook)] <- 0"
+"0",""
+"0","# question 2 (student with highest grade):"
+"0","print(paste('student',which.max(gradebook[[""avg.grade""]])))"
+"1","[1]"
+"1"," ""student 18"""
+"1","
+"

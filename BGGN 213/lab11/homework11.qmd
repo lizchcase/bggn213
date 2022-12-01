@@ -1,0 +1,53 @@
+---
+title: "Lab 11"
+author: "Liz Chamiec-Case"
+format: pdf
+editor: visual
+---
+
+```{r}
+snp <- read.table('file.txt')
+snp
+```
+
+## Question 13
+
+```{r}
+# identify genotypes and create dataframes where the data is parsed out by genotype
+
+genotypes <- unique(snp['geno'])
+a.g <- snp[snp$geno == "A/G",]
+a.a <- snp[snp$geno == "A/A",]
+g.g <- snp[snp$geno == "G/G",]
+
+print(genotypes)
+```
+
+```{r}
+# find the sample size and median expression level for A/G genotype
+
+print(paste('for genotype A/G, the sample size is',dim(a.g)[1],'and the median expression level is',median(a.g$exp)))
+```
+
+```{r}
+# find the sample size and median expression level for A/A genotype
+
+print(paste('for genotype A/A, the sample size is',dim(a.a)[1],'and the median expression level is',median(a.a$exp)))
+```
+
+```{r}
+# find the sample size and median expression level for G/G genotype
+
+print(paste('for genotype G/G, the sample size is',dim(g.g)[1],'and the median expression level is',median(g.g$exp)))
+```
+
+## Question 14
+
+```{r}
+library(ggplot2)
+
+ggplot(snp,aes(x=geno,y=exp)) +
+  geom_boxplot()
+```
+
+This plot shows us that A/A has higher expression than G/G. We have not run statistical analyses, however it appears that this might be significant. From this, we can conclude that the SNP does affect the expression of ORMDL3.

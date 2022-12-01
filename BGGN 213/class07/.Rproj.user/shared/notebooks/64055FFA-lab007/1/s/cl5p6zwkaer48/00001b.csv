@@ -1,0 +1,1 @@
+"0","text(pca$x[,1], pca$x[,2], colnames(x), col=rainbow(nrow(x)))"

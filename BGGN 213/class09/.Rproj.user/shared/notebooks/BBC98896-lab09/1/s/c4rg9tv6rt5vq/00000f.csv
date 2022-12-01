@@ -1,0 +1,4 @@
+"0","data.dist <- dist(data.scaled,method=”euclidean”)
+"
+"2","Error: unexpected input in ""data.dist <- dist(data.scaled,method=”""
+"

@@ -1,0 +1,9 @@
+"0","# A different PDF based output of the same data
+pathview(gene.data=foldchanges, pathway.id=""hsa05310"", kegg.native=FALSE)
+"
+"2","'select()' returned 1:1 mapping between keys and columns
+"
+"2","Info: Working in directory C:/Users/echamieccase/Documents/BGGN 213/lab12
+"
+"2","Info: Writing image file hsa05310.pathview.pdf
+"

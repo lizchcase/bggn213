@@ -1,0 +1,2 @@
+"0","# plot PC1 and PC2"
+"0","plot(pca$x[,1:2],col=my_cols,pch=16)"

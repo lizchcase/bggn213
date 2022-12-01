@@ -1,0 +1,24 @@
+"0","library(gapminder)"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","gapminder.url <- ""https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"""
+"0","gapminder <- read.delim(gapminder.url)"
+"0","gapminder.2007 <- gapminder %>% "
+"0","  filter(year==2007)"
+"0",""
+"0","ggplot(gapminder.2007) +"
+"0","  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +"
+"0","  geom_point(alpha=0.4)"

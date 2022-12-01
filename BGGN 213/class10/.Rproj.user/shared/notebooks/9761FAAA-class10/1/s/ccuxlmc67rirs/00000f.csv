@@ -1,0 +1,4 @@
+"0","# make loadings plot"
+"0",""
+"0","par(mar=c(8,4,2,2))"
+"0","barplot(pca$rotation[,1], las=2, ylab=""PC1 Contribution"")"

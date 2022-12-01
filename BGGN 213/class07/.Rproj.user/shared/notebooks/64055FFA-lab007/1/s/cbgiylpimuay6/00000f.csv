@@ -1,0 +1,3 @@
+"0","barplot(pca.var.per, main=""Scree Plot"", "
+"0","        names.arg = paste0(""PC"", 1:10),"
+"0","        xlab=""Principal Component"", ylab=""Percent Variation"")"

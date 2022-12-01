@@ -1,0 +1,6 @@
+"0","# We can use -1 here to remove the first column"
+"0","wisc.data <- wisc.df[,-1]"
+"0",""
+"0","# Create diagnosis vector for later "
+"0","diagnosis <- wisc.df[,1]"
+"0",""

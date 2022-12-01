@@ -1,0 +1,6 @@
+"0","print(paste('we need',which.max(cumsum(pve) >= 0.8),'PCs to explain 80% of the variance of the data'))
+"
+"1","[1]"
+"1"," ""we need 5 PCs to explain 80% of the variance of the data"""
+"1","
+"

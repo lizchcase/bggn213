@@ -1,0 +1,5 @@
+"0","# Subset to all CA areas with a population as large as 92037"
+"0","vax.36 <- filter(vax, age5_plus_population > 36144 &"
+"0","                as_of_date == ""2022-11-15"")"
+"0",""
+"0","head(vax.36)"

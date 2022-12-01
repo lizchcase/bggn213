@@ -1,0 +1,5 @@
+"0","# testing different hierarchical clustering methods: complete"
+"0",""
+"0","wisc.hclust.complete <- hclust(data.dist, method='complete')"
+"0","wisc.hclust.complete.clusters <- cutree(wisc.hclust.complete,k=5)"
+"0","plot(wisc.hclust.complete)"

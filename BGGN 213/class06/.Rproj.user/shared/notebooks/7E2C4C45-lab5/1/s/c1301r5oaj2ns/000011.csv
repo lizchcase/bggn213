@@ -1,0 +1,8 @@
+"0",""
+"0","# plot for 1957"
+"0","gapminder.1957 <- gapminder %>%"
+"0","  filter(year == 1957)"
+"0",""
+"0","ggplot(gapminder.1957,aes(x=gdpPercap, y=lifeExp, color=continent, size=pop)) +"
+"0","  geom_point(alpha=0.7) +"
+"0","  scale_size_area(max_size=15)"

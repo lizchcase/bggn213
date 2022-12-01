@@ -1,0 +1,5 @@
+"0","# testing different hierarchical clustering methods: average"
+"0",""
+"0","wisc.hclust.average <- hclust(data.dist, method='average')"
+"0","wisc.hclust.average.clusters <- cutree(wisc.hclust.average,k=5)"
+"0","plot(wisc.hclust.average)"

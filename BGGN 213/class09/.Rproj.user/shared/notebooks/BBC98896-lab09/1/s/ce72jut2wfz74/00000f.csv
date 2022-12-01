@@ -1,0 +1,6 @@
+"0","print(paste('there are',nrow(wisc.data),'observations (patients) in the dataset'))
+"
+"1","[1]"
+"1"," ""there are 569 observations (patients) in the dataset"""
+"1","
+"

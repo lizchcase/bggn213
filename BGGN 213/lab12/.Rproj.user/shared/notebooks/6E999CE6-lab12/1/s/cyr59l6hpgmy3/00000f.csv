@@ -1,0 +1,3 @@
+"0","# DEG threshold"
+"0","up.ind <- mycounts$log2fc > 2"
+"0","down.ind <- mycounts$log2fc < (-2)"

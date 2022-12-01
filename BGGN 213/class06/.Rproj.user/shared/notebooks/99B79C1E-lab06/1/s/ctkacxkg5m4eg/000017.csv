@@ -1,0 +1,6 @@
+"0","# question 3 (homework with lowest score):"
+"0","print(paste('homework',which.min(list(mean(gradebook$hw1),mean(gradebook$hw2),mean(gradebook$hw3),mean(gradebook$hw4),mean(gradebook$hw5)))))"
+"1","[1]"
+"1"," ""homework 2"""
+"1","
+"

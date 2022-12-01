@@ -1,0 +1,6 @@
+"0","print(paste('for genotype A/A, the sample size is',dim(a.a)[1],'and the median expression level is',median(a.a$exp)))
+"
+"1","[1]"
+"1"," ""for genotype A/A, the sample size is 108 and the median expression level is 31.248475"""
+"1","
+"

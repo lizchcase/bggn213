@@ -1,0 +1,6 @@
+"0","print(paste('there are',sum(diagnosis == 'M'),'observations with malignant diagnoses'))
+"
+"1","[1]"
+"1"," ""there are 212 observations with malignant diagnoses"""
+"1","
+"

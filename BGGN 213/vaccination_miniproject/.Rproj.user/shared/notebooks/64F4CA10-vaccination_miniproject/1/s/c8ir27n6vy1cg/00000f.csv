@@ -1,0 +1,6 @@
+"0","ucsd <- filter(sd, zip_code_tabulation_area==""92037"")"
+"0","ucsd[1,]$age5_plus_population"
+"1","[1]"
+"1"," 36144"
+"1","
+"

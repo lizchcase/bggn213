@@ -1,0 +1,4 @@
+"0","plot(modes, pdbs, col=grps.rd)
+"
+"2","Extracting SSE from pdbs$sse attribute
+"

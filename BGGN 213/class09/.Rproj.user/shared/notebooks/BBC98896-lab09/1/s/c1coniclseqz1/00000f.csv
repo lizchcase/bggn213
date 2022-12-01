@@ -1,0 +1,2 @@
+"0","# We can use -1 here to remove the first column"
+"0","wisc.data <- wisc.df[,-1]"

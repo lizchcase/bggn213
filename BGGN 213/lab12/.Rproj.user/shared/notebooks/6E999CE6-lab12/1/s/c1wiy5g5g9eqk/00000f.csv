@@ -1,0 +1,15 @@
+"0","# Type I diabetes mellitus (hsa04940)"
+"0",""
+"0","pathview(gene.data=foldchanges, pathway.id=""hsa04940"")"
+"2","Info: Downloading xml files for hsa04940, 1/1 pathways..
+"
+"2","Info: Downloading png files for hsa04940, 1/1 pathways..
+"
+"2","'select()' returned 1:1 mapping between keys and columns
+"
+"2","Info: Working in directory C:/Users/echamieccase/Documents/BGGN 213/lab12
+"
+"2","Info: Writing image file hsa04940.pathview.png
+"
+"0","# A different PDF based output of the same data"
+"0","pathview(gene.data=foldchanges, pathway.id=""hsa04940"", kegg.native=FALSE)"

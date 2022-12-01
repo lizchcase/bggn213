@@ -1,0 +1,5 @@
+"0","# testing different hierarchical clustering methods: single"
+"0",""
+"0","wisc.hclust.single <- hclust(data.dist, method='single')"
+"0","wisc.hclust.single.clusters <- cutree(wisc.hclust.single,k=5)"
+"0","plot(wisc.hclust.single)"

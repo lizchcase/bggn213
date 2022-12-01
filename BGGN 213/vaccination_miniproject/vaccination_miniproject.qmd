@@ -1,0 +1,246 @@
+---
+title: "Vaccination Rate Miniproject"
+author: "Liz Chamiec-Case"
+format: pdf
+editor: visual
+---
+
+## Getting Started
+
+```{r}
+# Import vaccination data
+vax <- read.csv('covid19vaccinesbyzipcode_test.csv')
+head(vax)
+```
+
+Q1. What column details the total number of people fully vaccinated?
+
+"persons_fully_vaccinated"
+
+Q2. What column details the Zip code tabulation area?
+
+"zip_code_tabulation_area"
+
+Q3. What is the earliest date in this dataset?
+
+"2022-11-22"
+
+Q4. What is the latest date in this dataset?
+
+"2021-01-05"
+
+```{r}
+# skim dataset
+
+skimr::skim(vax)
+```
+
+Q5. How many numeric columns are in this dataset?
+
+13
+
+Q6. Note that there are "missing values" in the dataset. How many NA values there in the persons_fully_vaccinated column?
+
+15440
+
+Q7. What percent of persons_fully_vaccinated values are missing (to 2 significant figures)?
+
+0.09
+
+Q8. \[Optional\]: Why might this data be missing?
+
+Could be unaccounted for due to sources of vaccine not counted by this data (e.g. military, etc.)
+
+## Working with Dates
+
+```{r}
+library(lubridate)
+today()
+```
+
+```{r}
+# Specify that we are using the year-month-day format
+vax$as_of_date <- ymd(vax$as_of_date)
+today() - vax$as_of_date[1]
+```
+
+```{r}
+# date span of dataset
+
+vax$as_of_date[nrow(vax)] - vax$as_of_date[1]
+```
+
+Q9. How many days have passed since the last update of the dataset?
+
+```{r}
+today() - vax$as_of_date[length(vax$as_of_date)]
+```
+
+Q10. How many unique dates are in the dataset (i.e. how many different dates are detailed)?
+
+```{r}
+length(unique(vax$as_of_date))
+```
+
+## Working with Zip Codes
+
+```{r}
+library(zipcodeR)
+geocode_zip('92037')
+```
+
+```{r}
+zip_distance('92037','92109')
+```
+
+```{r}
+reverse_zipcode(c('92037', "92109") )
+```
+
+```{r}
+# Pull data for all ZIP codes in the dataset
+# zipdata <- reverse_zipcode( vax$zip_code_tabulation_area ) # takes too long
+```
+
+### San Diego Area
+
+```{r}
+# Subset to San Diego county only areas
+sd <- vax[ vax$county == "San Diego" , ]
+nrow(sd)
+```
+
+Q11. How many distinct zip codes are listed for San Diego County?
+
+```{r}
+length(unique(sd$zip_code_tabulation_area))
+```
+
+Q12. What San Diego County Zip code area has the largest 12 + Population in this dataset?
+
+```{r}
+sd[which.max(sd$age12_plus_population),]
+```
+
+92154
+
+```{r}
+# San Diego county on 2022-11-15
+
+library(dplyr)
+
+sd.nov15 <- filter(vax, county == "San Diego", as_of_date == '2022-11-15')
+head(sd.nov15)
+```
+
+Q13. What is the overall average "Percent of Population Fully Vaccinated" value for all San Diego "County" as of "2022-11-15"?
+
+```{r}
+mean(sd.nov15$percent_of_population_fully_vaccinated, na.rm=TRUE) # na values are removed
+```
+
+Q14. Using either ggplot or base R graphics make a summary figure that shows the distribution of Percent of Population Fully Vaccinated values as of "2022-11-15"?
+
+```{r}
+library(ggplot2)
+
+ggplot(sd.nov15) + 
+  geom_histogram(aes(x = percent_of_population_fully_vaccinated))
+```
+
+## La Jolla/UCSD
+
+```{r}
+# isolate La Jolla data and print population age 5+ on first day of data
+ucsd <- filter(sd, zip_code_tabulation_area=="92037")
+ucsd[1,]$age5_plus_population
+```
+
+```{r}
+# time rate course for vaccination at UCSD
+
+ggplot(ucsd) +
+  aes(x = as_of_date,
+      percent_of_population_fully_vaccinated) +
+  geom_point() +
+  geom_line(group=1) +
+  ylim(c(0,1)) +
+  labs(x="Date", y="Percent Vaccinated")
+```
+
+```{r}
+# Subset to all CA areas with a population as large as 92037
+vax.36 <- filter(vax, age5_plus_population > 36144 &
+                as_of_date == "2022-11-15")
+
+head(vax.36)
+```
+
+Q16. Calculate the mean "Percent of Population Fully Vaccinated" for ZIP code areas with a population as large as 92037 (La Jolla) as_of_date "2022-11-15". Add this as a straight horizontal line to your plot from above with the geom_hline() function?
+
+```{r}
+avg.vaccinated <- mean(vax.36$percent_of_population_fully_vaccinated)
+
+ggplot(ucsd) +
+  aes(x = as_of_date,
+      percent_of_population_fully_vaccinated) +
+  geom_point() +
+  geom_line(group=1) +
+  geom_hline(yintercept=avg.vaccinated,linetype=2,color="red") +
+  ylim(c(0,1)) +
+  labs(x="Date", y="Percent Vaccinated")
+```
+
+Q17. What is the 6 number summary (Min, 1st Qu., Median, Mean, 3rd Qu., and Max) of the "Percent of Population Fully Vaccinated" values for ZIP code areas with a population as large as 92037 (La Jolla) as_of_date "2022-11-15"?
+
+```{r}
+summary(vax.36$percent_of_population_fully_vaccinated)
+```
+
+Q18. Using ggplot generate a histogram of this data.
+
+```{r}
+ggplot(vax.36) +
+  geom_histogram(aes(x=percent_of_population_fully_vaccinated))
+```
+
+Q19. Is the 92109 and 92040 ZIP code areas above or below the average value you calculated for all these above?
+
+```{r}
+vax %>% filter(as_of_date == "2022-11-15") %>%  
+  filter(zip_code_tabulation_area=="92040") %>%
+  select(percent_of_population_fully_vaccinated)
+```
+
+92040 less than calculated above
+
+```{r}
+vax %>% filter(as_of_date == "2022-11-15") %>%  
+  filter(zip_code_tabulation_area=="92109") %>%
+  select(percent_of_population_fully_vaccinated)
+```
+
+92109 less than calculated above
+
+Q20. Finally make a time course plot of vaccination progress for all areas in the full dataset with a age5_plus_population \> 36144.
+
+```{r}
+vax.36.all <- filter(vax, age5_plus_population > 36144)
+vax.36.all.mean <- mean(vax.36.all$percent_of_population_fully_vaccinated, na.rm=TRUE)
+
+
+ggplot(vax.36.all) +
+  aes(x = as_of_date,
+      y = percent_of_population_fully_vaccinated, 
+      group=zip_code_tabulation_area) +
+  geom_line(alpha=0.2, color="blue") +
+  ylim(c(0,1)) +
+  labs(x='Date', y='Percent Vaccinated',
+       title="Vaccination rate across California",
+       subtitle="Only areas with a population above 36k are shown") +
+  geom_hline(yintercept = vax.36.all.mean, linetype=2)
+```
+
+Q21. How do you feel about coming to class in person after Thanksgiving break?
+
+Honestly probably won't come, but that's more because I prefer to do the labs on my own. I appreciate your asking though!
